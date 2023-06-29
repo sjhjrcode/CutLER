@@ -44,7 +44,10 @@ from evaluation import COCOEvaluator
 from detectron2.modeling import GeneralizedRCNNWithTTA
 import data # register new datasets
 import modeling.roi_heads
+DATASET_PATH = os.environ.get("DETECTRON2_DATASETS", "C:/Users/Steven Howell/Documents/GitHub/CutLER/datasets/")
+#PYTORCH_CUDA_ALLOC_CONF = os.environ.get("PYTORCH_CUDA_ALLOC_CONF","max_split_size_mb:16")
 
+#export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
 def build_evaluator(cfg, dataset_name, output_folder=None):
     """
     Create evaluator(s) for a given dataset.

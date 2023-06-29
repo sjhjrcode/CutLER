@@ -153,6 +153,15 @@ COCO_CATEGORIES = [
     {"color": [250, 141, 255], "isthing": 0, "id": 200, "name": "rug-merged"},
 ]
 
+CODS_CATEGORIES = [
+    {"color": [220, 20, 60], "isthing": 1, "id": 1, "name": "eye"},
+    {"color": [119, 11, 32], "isthing": 1, "id": 2, "name": "leg"},
+    {"color": [0, 0, 142], "isthing": 1, "id": 3, "name": "arm"},
+    {"color": [0, 0, 230], "isthing": 1, "id": 4, "name": "shadow"},
+    {"color": [106, 0, 228], "isthing": 1, "id": 5, "name": "body"},
+    {"color": [0, 60, 100], "isthing": 1, "id": 6, "name": "mouth"},
+]
+
 IMAGENET_CATEGORIES = [
     {"color": [220, 20, 60], "isthing": 1, "id": 1, "name": "fg"},
 ]
@@ -268,6 +277,20 @@ def _get_imagenet_instances_meta():
     }
     return ret
 
+def _get_cods_instances_meta():
+    thing_ids = [k["id"] for k in IMAGENET_CATEGORIES if k["isthing"] == 1]
+    thing_colors = [k["color"] for k in IMAGENET_CATEGORIES if k["isthing"] == 1]
+    assert len(thing_ids) == 1, len(thing_ids)
+    thing_dataset_id_to_contiguous_id = {k: i for i, k in enumerate(thing_ids)}
+    thing_classes = [k["name"] for k in IMAGENET_CATEGORIES if k["isthing"] == 1]
+    ret = {
+        "thing_dataset_id_to_contiguous_id": thing_dataset_id_to_contiguous_id,
+        "thing_classes": thing_classes,
+        "thing_colors": thing_colors,
+        #"class_image_count":  [{'id': 1, 'image_count': 116986}]
+    }
+    return ret
+
 def _get_UVO_instances_meta():
     thing_ids = [k["id"] for k in UVO_CATEGORIES if k["isthing"] == 1]
     thing_colors = [k["color"] for k in UVO_CATEGORIES if k["isthing"] == 1]
@@ -324,6 +347,8 @@ def _get_builtin_metadata(dataset_name):
         return _get_imagenet_instances_meta()
     elif dataset_name == "uvo":
         return _get_UVO_instances_meta()
+    elif dataset_name =="CODS":
+        return _get_cods_instances_meta()
     elif dataset_name == "coco_panoptic_standard":
         meta = {}
         # The following metadata maps contiguous id from [0, #thing categories +

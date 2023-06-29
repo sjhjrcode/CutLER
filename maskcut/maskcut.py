@@ -159,7 +159,7 @@ def maskcut(img_path, backbone,patch_size, tau, N=1, fixed_size=480, cpu=False) 
     I = Image.open(img_path).convert('RGB')
     bipartitions, eigvecs = [], []
 
-    I_new = I.resize((int(fixed_size), int(fixed_size)), PIL.Image.LANCZOS)
+    I_new = I.resize((int(fixed_size), int(fixed_size)), PIL.Resampling.LANCZOS)
     I_resize, w, h, feat_w, feat_h = utils.resize_pil(I_new, patch_size)
 
     tensor = ToTensor(I_resize).unsqueeze(0)

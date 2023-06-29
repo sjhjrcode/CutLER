@@ -43,6 +43,10 @@ _PREDEFINED_SPLITS_COCO_CA["coco_cls_agnostic"] = {
     "cls_agnostic_coco": ("coco/val2017", "coco/annotations/coco_cls_agnostic_instances_val2017.json"),
     "cls_agnostic_coco20k": ("coco/train2014", "coco/annotations/coco20k_trainval_gt.json"),
 }
+_PREDEFINED_SPLITS_CODS_CA = {}
+_PREDEFINED_SPLITS_CODS_CA["CODS"] = {
+    "CODS": ("CODS/train", "CODS/annotations/imagenet_train_fixsize480_tau0.15_N3.json"),
+}
 
 _PREDEFINED_SPLITS_IMAGENET = {}
 _PREDEFINED_SPLITS_IMAGENET["imagenet"] = {
@@ -95,6 +99,16 @@ _PREDEFINED_SPLITS_UVO["uvo"] = {
 
 def register_all_imagenet(root):
     for dataset_name, splits_per_dataset in _PREDEFINED_SPLITS_IMAGENET.items():
+        for key, (image_root, json_file) in splits_per_dataset.items():
+            # Assume pre-defined datasets live in `./datasets`.
+            register_coco_instances(
+                key,
+                _get_builtin_metadata(dataset_name),
+                os.path.join(root, json_file) if "://" not in json_file else json_file,
+                os.path.join(root, image_root),
+            )
+def register_all_cods(root):
+    for dataset_name, splits_per_dataset in _PREDEFINED_SPLITS_CODS_CA.items():
         for key, (image_root, json_file) in splits_per_dataset.items():
             # Assume pre-defined datasets live in `./datasets`.
             register_coco_instances(
@@ -214,3 +228,4 @@ register_all_kitti(_root)
 register_all_openimages(_root)
 register_all_objects365(_root)
 register_all_lvis(_root)
+register_all_cods(_root)
