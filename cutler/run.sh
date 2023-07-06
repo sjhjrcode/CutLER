@@ -22,7 +22,7 @@
 #SBATCH --mail-user=steven.howell-1@ou.edu
 #SBATCH --mail-type=ALL
 #SBATCH --chdir=/home/d70howell/D70/CutLER/cutler
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:2
 #
 #################################################
 # Do not change this line unless you have your own python/tensorflow/keras set up
