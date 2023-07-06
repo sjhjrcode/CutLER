@@ -27,6 +27,8 @@
 #################################################
 # Do not change this line unless you have your own python/tensorflow/keras set up
 # Change this line to start an instance of your experiment
+echo "test"
+nvidia-smi
 conda info --envs
 eval "$(conda shell.bash hook)"
 conda activate exp
