@@ -19,9 +19,9 @@
 #SBATCH --error=error.txt
 #SBATCH --time=2-00:00:00
 #SBATCH --job-name=train_det
-#SBATCH --mail-user=timothy.sharp-1@ou.edu
+#SBATCH --mail-user=steven.howell-1@ou.edu
 #SBATCH --mail-type=ALL
-#SBATCH --chdir=/home/timmy1291/OR/workspace/
+#SBATCH --chdir=/home/d70howell/D70/CutLER/cutler
 #SBATCH --gres=gpu:1
 #
 #################################################
