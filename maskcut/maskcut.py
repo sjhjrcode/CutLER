@@ -159,7 +159,7 @@ def maskcut(img_path, backbone,patch_size, tau, N=1, fixed_size=480, cpu=False) 
     I = Image.open(img_path).convert('RGB')
     bipartitions, eigvecs = [], []
 
-    I_new = I.resize((int(fixed_size), int(fixed_size)), PIL.Resampling.LANCZOS)
+    I_new = I.resize((int(fixed_size), int(fixed_size)), PIL.Image.LANCZOS)
     I_resize, w, h, feat_w, feat_h = utils.resize_pil(I_new, patch_size)
 
     tensor = ToTensor(I_resize).unsqueeze(0)
@@ -405,9 +405,9 @@ if __name__ == "__main__":
 
     # save annotations
     if len(img_folders) == args.num_folder_per_job and args.job_index == 0:
-        json_name = '{}/imagenet_train_fixsize{}_tau{}_N{}.json'.format(args.out_dir, args.fixed_size, args.tau, args.N)
+        json_name = '{}/imagenet_test_fixsize{}_tau{}_N{}.json'.format(args.out_dir, args.fixed_size, args.tau, args.N)
     else:
-        json_name = '{}/imagenet_train_fixsize{}_tau{}_N{}_{}_{}.json'.format(args.out_dir, args.fixed_size, args.tau, args.N, start_idx, end_idx)
+        json_name = '{}/imagenet_test_fixsize{}_tau{}_N{}_{}_{}.json'.format(args.out_dir, args.fixed_size, args.tau, args.N, start_idx, end_idx)
     with open(json_name, 'w') as output_json_file:
         json.dump(output, output_json_file)
     print(f'dumping {json_name}')
