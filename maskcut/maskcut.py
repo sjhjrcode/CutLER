@@ -280,8 +280,23 @@ LICENSES = [
 CATEGORIES = [
     {
         'id': 1,
-        'name': 'fg',
-        'supercategory': 'fg',
+        'name': 'eye',
+        'supercategory': 'camo',
+        'id': 2,
+        'name': 'leg',
+        'supercategory': 'camo',
+        'id': 3,
+        'name': 'arm',
+        'supercategory': 'camo',
+        'id': 4,
+        'name': 'shadow',
+        'supercategory': 'camo',
+        'id': 5,
+        'name': 'body',
+        'supercategory': 'camo',
+        'id': 6,
+        'name': 'mouth',
+        'supercategory': 'camo',
     },
 ]
 

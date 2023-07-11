@@ -278,11 +278,11 @@ def _get_imagenet_instances_meta():
     return ret
 
 def _get_cods_instances_meta():
-    thing_ids = [k["id"] for k in IMAGENET_CATEGORIES if k["isthing"] == 1]
-    thing_colors = [k["color"] for k in IMAGENET_CATEGORIES if k["isthing"] == 1]
+    thing_ids = [k["id"] for k in CODS_CATEGORIES if k["isthing"] == 1]
+    thing_colors = [k["color"] for k in CODS_CATEGORIES if k["isthing"] == 1]
     assert len(thing_ids) == 1, len(thing_ids)
     thing_dataset_id_to_contiguous_id = {k: i for i, k in enumerate(thing_ids)}
-    thing_classes = [k["name"] for k in IMAGENET_CATEGORIES if k["isthing"] == 1]
+    thing_classes = [k["name"] for k in CODS_CATEGORIES if k["isthing"] == 1]
     ret = {
         "thing_dataset_id_to_contiguous_id": thing_dataset_id_to_contiguous_id,
         "thing_classes": thing_classes,
@@ -348,6 +348,8 @@ def _get_builtin_metadata(dataset_name):
     elif dataset_name == "uvo":
         return _get_UVO_instances_meta()
     elif dataset_name =="CODS":
+        return _get_cods_instances_meta()
+    elif dataset_name =="CODS2k":
         return _get_cods_instances_meta()
     elif dataset_name == "coco_panoptic_standard":
         meta = {}
